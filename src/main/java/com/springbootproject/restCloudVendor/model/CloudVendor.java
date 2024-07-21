@@ -1,5 +1,6 @@
 package com.springbootproject.restCloudVendor.model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
@@ -9,9 +10,13 @@ import jakarta.persistence.Table;
 public class CloudVendor {
 
     @Id
+    @Column(name = "VENDOR_ID")
     private String vendorId;
+    @Column(name = "VENDOR_NAME")
     private String vendorName;
+    @Column(name = "VENDOR_ADDRESS")
     private String vendorAddress;
+    @Column(name = "VENDOR_PHONENUMBER")
     private String vendorPhoneNumber;
 
     public CloudVendor() {
