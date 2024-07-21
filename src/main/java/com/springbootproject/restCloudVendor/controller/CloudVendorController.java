@@ -2,7 +2,10 @@ package com.springbootproject.restCloudVendor.controller;
 
 
 import com.springbootproject.restCloudVendor.model.CloudVendor;
+import com.springbootproject.restCloudVendor.response.ResponseHandler;
 import com.springbootproject.restCloudVendor.service.CloudVendorService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,8 +21,9 @@ public class CloudVendorController {
 
 
     @GetMapping("{vendorId}")
-    public CloudVendor getCloudVendorDetails(@PathVariable("vendorId") String vendorId){
-        return cloudVendorService.getCloudVendor(vendorId);
+    public ResponseEntity<Object> getCloudVendorDetails(@PathVariable("vendorId") String vendorId){
+        return  ResponseHandler.responseBuilder("Requested vendor details are given here", HttpStatus.OK,cloudVendorService.getCloudVendor(vendorId));
+
     }
 
     @GetMapping()
