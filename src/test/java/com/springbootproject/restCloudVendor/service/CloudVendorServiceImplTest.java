@@ -6,7 +6,9 @@ import com.springbootproject.restCloudVendor.service.impl.CloudVendorServiceImpl
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Answers;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
 import java.util.ArrayList;
@@ -14,8 +16,7 @@ import java.util.Collections;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 public class CloudVendorServiceImplTest {
 
@@ -71,6 +72,7 @@ public class CloudVendorServiceImplTest {
         mock(CloudVendorRepository.class);
 
         when(cloudVendorRepository.findAll( )).thenReturn(new ArrayList<CloudVendor>(Collections.singleton(cloudVendor)));
+        assertThat(cloudVendorService.getAllCloudVendor().get(0).getVendorPhoneNumber()).isEqualTo(cloudVendor.getVendorPhoneNumber());
     }
 
     @Test
@@ -86,7 +88,11 @@ public class CloudVendorServiceImplTest {
     @Test
     void testDeleteCloudVendor(){
         mock(CloudVendor.class);
-        mock(CloudVendorRepository.class);
+        mock(CloudVendorRepository.class, CALLS_REAL_METHODS);
+
+        doAnswer(Answers.CALLS_REAL_METHODS).when(cloudVendorRepository).deleteById(any());
+
+        assertThat(cloudVendorService.deleteCloudVendor("1")).isEqualTo("success");
 
     }
 
