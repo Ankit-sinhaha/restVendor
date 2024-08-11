@@ -25,3 +25,6 @@ management:
     health:
       show-details: always
 
+dummyService:
+  port: 8081
+  address: 127.0.0.1
