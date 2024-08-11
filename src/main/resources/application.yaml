@@ -19,8 +19,8 @@ management:
   endpoints:
     web:
       exposure:
-        include: "*"
-        exclude: "caches"
+        include: "health, beans, metrics"
+
   endpoint:
     health:
       show-details: always
